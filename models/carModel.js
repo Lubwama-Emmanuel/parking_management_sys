@@ -18,7 +18,8 @@ const carSchema = new mongoose.Schema({
         }
     },
     model: {
-        type: String
+        type: String,
+        default: 'trucks'
     },
     phoneNumber: {
         type: Number
@@ -29,8 +30,8 @@ const carSchema = new mongoose.Schema({
 
 carSchema.pre('save', function (next) {
     const getTime = new Date();
-    const timeMinutes = ((getTime.getHours() * 60) + getTime.getMinutes())
-    this.arrivalTime = timeMinutes;
+    const time = (getTime.getHours()+':'+getTime.getMinutes())
+    this.arrivalTime = time;
     next()
 })
 
